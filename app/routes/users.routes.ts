@@ -6,6 +6,7 @@ import {
   postUsers,
   putUser,
   deleteUser,
+  removeAdminStatus,
 } from "../controllers/users.controllers";
 
 const router = Router();
@@ -19,6 +20,7 @@ router.post("/", postUsers);
 
 // put routes
 router.put("/:id", putUser);
+router.put("/remove-admin-status/:id", removeAdminStatus);
 
 // delete routes
 router.delete("/:id", deleteUser);
