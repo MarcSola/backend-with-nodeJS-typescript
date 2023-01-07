@@ -1,7 +1,9 @@
 // general imports
 import express, { Application } from "express";
 import cors from "cors";
-import path from "path";
+
+// database import
+import db from "../../database/connect";
 
 // route imports
 import userRoutes from "../routes/users.routes";
@@ -19,10 +21,21 @@ export class Server {
   constructor() {
     this.app = express();
     this.port = process.env.PORT || "8000";
+    this.dbConnect();
 
     // middlewares always before routes
     this.setMiddlewares();
     this.setRoutes();
+  }
+
+  public async dbConnect() {
+    try {
+      // authentication for the database
+      await db.authenticate();
+      console.log("Database online");
+    } catch (error: any) {
+      throw new Error(error);
+    }
   }
 
   public setMiddlewares(): void {

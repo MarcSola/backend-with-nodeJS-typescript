@@ -1,11 +1,16 @@
 // imports
 import { Request, Response } from "express";
+import User from "../models/user";
 
 // API methods
 // GET
-export const getUsers = (req: Request, res: Response) => {
+export const getUsers = async (req: Request, res: Response) => {
+  // get users
+  const users = await User.findAll();
+  // generate response
   res.json({
-    message: "getUsers",
+    message: "getUsers was successful",
+    users: users,
   });
 };
 
